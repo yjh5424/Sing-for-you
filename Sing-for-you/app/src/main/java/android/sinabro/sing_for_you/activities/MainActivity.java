@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button1;
     private TextView temperature;
     private Service service;
+    private ArrayList<Music> arrayList;
 
 
 
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
+        recyclerView.setAdapter(new RecyclerviewAdapter(getApplicationContext(), arrayList));
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         service = HTTPConnection.getInstance().create(Service.class);
@@ -116,8 +118,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 JsonArray jsonObject=response.body().getAsJsonArray("music");
                 JsonArray jsonElements=jsonObject.getAsJsonArray();
-                adapter = new RecyclerviewAdapter(getApplicationContext(), getArrayList(jsonElements));
-                recyclerView.setAdapter(adapter);
+                arrayList=getArrayList(jsonElements);
             }
 
             @Override
@@ -142,32 +143,4 @@ public class MainActivity extends AppCompatActivity {
         return  arrayList;
     }
 
-
-    public Bitmap getBitmapFromURL(String src) {
-        try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    } // Author: sile
-            private boolean runtime_permissions() {
-                if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                        ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) !=
-                                PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{
-                            android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION
-                    }, 100);
-                    return true;
-                }
-
-                return false;
-
-            }
 }
