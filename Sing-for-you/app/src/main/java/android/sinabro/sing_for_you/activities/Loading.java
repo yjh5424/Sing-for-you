@@ -13,10 +13,10 @@ public class Loading extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
         Handler hd = new Handler();
-        hd.postDelayed(new splashHandler(), 3000); // 3초 후에 hd Handler 실행
+        hd.postDelayed(new splashhandler(), 3000); // 3초 후에 hd Handler 실행
     }
 
-    private class splashHandler implements Runnable {
+    private class splashhandler implements Runnable {
         public void run() {
             startActivity(new Intent(getApplicationContext(), LoginActivity.class)); // 로딩이 끝난후 이동할 Activity
             finish();
