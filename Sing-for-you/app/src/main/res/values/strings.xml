@@ -2,4 +2,8 @@
     <string name="app_name">Sing-for-you</string>
     <string name="login_created">님, 환영합니다.</string>
 
+    <!--facebook 아이디 값들-->
+    <string name="facebook_app_id">870192789794430</string>
+    <string name="fb_login_protocol_scheme">fb870192789794430</string>
+
 </resources>

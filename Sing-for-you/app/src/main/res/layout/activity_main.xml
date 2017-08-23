@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_weather_pm_sun"
+    android:background="@drawable/bg_weather_am_cloud"
     android:orientation="vertical">
 
     <LinearLayout
@@ -42,13 +42,12 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="18dp"
-                android:layout_toEndOf="@+id/profile_image"
-                android:layout_toRightOf="@+id/profile_image"
                 android:text="서윤호님의 밤"
-                android:textSize="25sp" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/profile_image" />
 
             <TextView
                 android:id="@+id/temperature"
@@ -56,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="32dp"
                 android:layout_marginTop="20dp"
                 android:textColor="#000"
                 android:textSize="20sp" />
@@ -71,7 +70,8 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginTop="8dp"
                 android:text="24도"
-                android:textSize="20sp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp" />
 
         </RelativeLayout>
 
@@ -103,9 +103,9 @@
                         android:layout_gravity="start"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="8dp"
-                        android:text="서윤호님의 "
-                        android:textColor="#000"
-                        android:textSize="15sp" />
+                        android:text="오후 12시 30분의 흐릴때 서윤호 님의 "
+                        android:textColor="#fff"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -113,7 +113,8 @@
                         android:layout_below="@+id/mainTitle"
                         android:layout_marginLeft="16dp"
                         android:text="PLAY LIST"
-                        android:textColor="#000"
+                        android:textStyle="bold"
+                        android:textColor="#fff"
                         android:textSize="18sp" />
                 </RelativeLayout>
 
