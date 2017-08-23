@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidquery.AQuery;
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBuuton;
     private EditText idEditText;
     private EditText passwordEditText;
+    private TextView signUpTextView;
     private Service service;
 
     @Override
@@ -37,17 +39,27 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginBuuton=(Button)findViewById(R.id.loginButton);
-        loginBuuton.setOnClickListener(new View.OnClickListener() {
+        signUpTextView=(TextView)findViewById(R.id.signUpTextView);
+        signUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                Intent intent=new Intent(LoginActivity.this,SignUp.class);
                 startActivity(intent);
             }
         });
 
-      /*
+
+
+        loginBuuton = (Button) findViewById(R.id.loginButton);
         loginBuuton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+      /*  loginBuuton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -76,10 +88,10 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             }
-        });*/
+        });
 
+    }*/
     }
-
     public void checkButton(Button button){
 
     }
@@ -93,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 int code = response.code();
                 switch (code) {
-                    case Service.HTTP_CREATED:
+                    case Service.HTTP_OK:
                         Toast.makeText(LoginActivity.this, id + getString(R.string.login_created), Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);

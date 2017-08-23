@@ -6,4 +6,13 @@
     <string name="facebook_app_id">870192789794430</string>
     <string name="fb_login_protocol_scheme">fb870192789794430</string>
 
+
+    <!--아이디 내용-->
+    <string name="name">이름</string>
+    <string name="email">이메일 또는 아이디</string>
+    <string name="password">비밀번호</string>
+    <string name="password_check">비밀번호 확인</string>
+    <string name="birthday">생년월일</string>
+
+
 </resources>
