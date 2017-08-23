@@ -72,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Music> arrayList;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,21 +100,18 @@ public class MainActivity extends AppCompatActivity {
         service = HTTPConnection.getInstance().create(Service.class);
 
 
-
-
-
         //setBackground(2);
         service.getWeather(32.22, 21.32).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.d("hello", response.body().get("weather")+"");
+                Log.d("hello", response.body().get("weather") + "");
 
-                JsonElement weather=response.body().get("weather");
-                String weather_name=weather.getAsString();
-                temperature=(TextView)findViewById(R.id.temperature);
+                JsonElement weather = response.body().get("weather");
+                String weather_name = weather.getAsString();
+                temperature = (TextView) findViewById(R.id.temperature);
                 temperature.setText(weather_name);
                 getMusicList();
-                Log.d("----------aaa---------",weather_name);
+                Log.d("----------aaa---------", weather_name);
             }
 
             @Override
@@ -126,17 +121,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
     }//oncreate
 
-    public void getMusicList(){
+    public void getMusicList() {
         service.getMusicList(2).enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                JsonArray jsonObject=response.body().getAsJsonArray("music");
-                JsonArray jsonElements=jsonObject.getAsJsonArray();
-                arrayList=getArrayList(jsonElements);
-                adapter=new RecyclerviewAdapter(getApplicationContext(),arrayList);
+                JsonArray jsonObject = response.body().getAsJsonArray("music");
+                JsonArray jsonElements = jsonObject.getAsJsonArray();
+                arrayList = getArrayList(jsonElements);
+                adapter = new RecyclerviewAdapter(getApplicationContext(), arrayList);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -148,18 +142,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public ArrayList<Music> getArrayList(JsonArray jsonElements){
-        ArrayList<Music> arrayList=new ArrayList<>();
-        for(int i=0;i<jsonElements.size();i++){
-            JsonObject jsonObject=(JsonObject)jsonElements.get(i);
-            String title=jsonObject.getAsJsonPrimitive("title").getAsString();
-            String singer=jsonObject.getAsJsonPrimitive("singer").getAsString();
-            String url=jsonObject.getAsJsonPrimitive("musicURL").getAsString();
-            String imaurl=jsonObject.getAsJsonPrimitive("imgURL").getAsString();
+    public ArrayList<Music> getArrayList(JsonArray jsonElements) {
+        ArrayList<Music> arrayList = new ArrayList<>();
+        for (int i = 0; i < jsonElements.size(); i++) {
+            JsonObject jsonObject = (JsonObject) jsonElements.get(i);
+            String title = jsonObject.getAsJsonPrimitive("title").getAsString();
+            String singer = jsonObject.getAsJsonPrimitive("singer").getAsString();
+            String url = jsonObject.getAsJsonPrimitive("musicURL").getAsString();
+            String imaurl = jsonObject.getAsJsonPrimitive("imgURL").getAsString();
 
-            arrayList.add(new Music(title,singer,url,imaurl));
+            arrayList.add(new Music(title, singer, url, imaurl));
         }
-        return  arrayList;
+        return arrayList;
     }
 
 
@@ -177,17 +171,18 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     } // Author: sile
-            private boolean runtime_permissions() {
-                if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                        ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) !=
-                                PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{
-                            android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION
-                    }, 100);
-                    return true;
-                }
 
-                return false;
+    private boolean runtime_permissions() {
+        if (Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{
+                    android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION
+            }, 100);
+            return true;
+        }
 
-            }
+        return false;
+
+    }
 }
