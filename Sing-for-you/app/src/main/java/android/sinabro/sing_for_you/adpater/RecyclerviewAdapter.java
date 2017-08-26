@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.sinabro.sing_for_you.R;
+import android.sinabro.sing_for_you.activities.YoutubeActivity;
 import android.sinabro.sing_for_you.model.Music;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -52,12 +53,15 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         String uri=arrayList.get(position).getImgURL();
         Glide.with(context).load(uri).into(holder.imageView);
 
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
+        holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse(arrayList.get(position).getUrl()));
+               /* Intent browserIntent=new Intent(Intent.ACTION_VIEW, Uri.parse(arrayList.get(position).getUrl()));
                 browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(browserIntent);
+                context.startActivity(browserIntent); 유튜브 url 이동*/
+                Intent intent = new Intent(context, YoutubeActivity.class);
+                context.startActivity(intent);
+
             }
         });
     }
@@ -70,7 +74,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         TextView singerTextView;
-
+        View view;
         ImageView imageView;
 
         ViewHolder(View v) {
@@ -79,6 +83,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
             titleTextView=(TextView)v.findViewById(R.id.title);
             singerTextView=(TextView)v.findViewById(R.id.singer);
             imageView=(ImageView)v.findViewById(R.id.item_image);
+            view=v.findViewById(R.id.song);
         }
     }
 
