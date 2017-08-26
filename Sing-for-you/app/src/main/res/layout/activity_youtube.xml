@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="android.sinabro.sing_for_you.activities.YoutubeActivity">
+    tools:context="android.sinabro.sing_for_you.activities.YoutubeActivity"
+    android:background="#FFFFFF">
 
     <fragment
         android:name="com.google.android.youtube.player.YouTubePlayerFragment"
@@ -17,7 +18,7 @@
         android:layout_alignParentEnd="true"/>
 
 
-    <com.gigamole.infinitecycleviewpager.VerticalInfiniteCycleViewPager
+    <com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager
         android:id="@+id/VerticalCycleViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,5 +31,5 @@
         app:icvp_scroll_duration="500"
         >
 
-    </com.gigamole.infinitecycleviewpager.VerticalInfiniteCycleViewPager>
+    </com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager>
 </LinearLayout>
