@@ -60,6 +60,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
                 browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(browserIntent); 유튜브 url 이동*/
                 Intent intent = new Intent(context, YoutubeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
             }
