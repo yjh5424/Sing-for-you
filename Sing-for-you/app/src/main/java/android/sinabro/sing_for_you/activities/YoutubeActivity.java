@@ -35,12 +35,12 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube);
 
-//        youTubePlayerFragment = (YouTubePlayerFragment)getFragmentManager().findFragmentById(R.id.youtubeplayerfragment);
-//        youTubePlayerFragment.initialize(DEVELOPER_KEY,this);
+        youTubePlayerFragment = (YouTubePlayerFragment)getFragmentManager().findFragmentById(R.id.youtubeplayerfragment);
+        youTubePlayerFragment.initialize(DEVELOPER_KEY,this);
 
 
 
-        VerticalInfiniteCycleViewPager pager = (VerticalInfiniteCycleViewPager) findViewById(R.id.VerticalCycleViewPager);
+        HorizontalInfiniteCycleViewPager pager = (HorizontalInfiniteCycleViewPager) findViewById(R.id.VerticalCycleViewPager);
         pager.setAdapter(new PlayerCycleAdapter(initData(),getApplicationContext()));
 
     }
