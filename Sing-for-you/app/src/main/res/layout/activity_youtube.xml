@@ -31,14 +31,18 @@
         android:id="@+id/VerticalCycleViewPager"
         android:layout_width="match_parent"
         android:layout_weight="3"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
         android:layout_height="0dp"
         app:icvp_interpolator="@android:anim/anticipate_overshoot_interpolator"
         app:icvp_center_page_scale_offset="30dp"
         app:icvp_max_page_scale="0.8"
         app:icvp_medium_scaled="true"
-        app:icvp_min_page_scale="0.5"
+        app:icvp_min_page_scale="0.3"
         app:icvp_min_page_scale_offset="5dp"
-        app:icvp_scroll_duration="500"
+        app:icvp_scroll_duration="400"
         >
 
     </com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager>

@@ -49,6 +49,8 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         playerItems=(ArrayList<Music>) getIntent().getSerializableExtra("list");
         pager.setAdapter(new PlayerCycleAdapter(playerItems,getApplicationContext()));
 
+        for(String str:pager)
+
     }
 
 
@@ -78,6 +80,7 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         if(!b){
             youTubePlayer.cueVideo(VIDEO_ID);
+            youTubePlayer.
         }
     }
 
