@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.sinabro.sing_for_you.R;
 import android.sinabro.sing_for_you.activities.YoutubeActivity;
 import android.sinabro.sing_for_you.model.Music;
@@ -61,11 +62,13 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
                 context.startActivity(browserIntent); 유튜브 url 이동*/
                 Intent intent = new Intent(context, YoutubeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("list",arrayList);
                 context.startActivity(intent);
 
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

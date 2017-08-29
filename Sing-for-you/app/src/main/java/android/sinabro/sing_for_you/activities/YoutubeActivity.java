@@ -3,9 +3,11 @@ package android.sinabro.sing_for_you.activities;
 import android.content.Intent;
 import android.sinabro.sing_for_you.R;
 import android.sinabro.sing_for_you.adpater.PlayerCycleAdapter;
+import android.sinabro.sing_for_you.model.Music;
 import android.sinabro.sing_for_you.model.PlayerItem;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
@@ -28,7 +30,7 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
 
     YouTubePlayerFragment youTubePlayerFragment;
 
-    ArrayList<PlayerItem> playerItems;
+    ArrayList<Music> playerItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +40,26 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         youTubePlayerFragment = (YouTubePlayerFragment)getFragmentManager().findFragmentById(R.id.youtubeplayerfragment);
         youTubePlayerFragment.initialize(DEVELOPER_KEY,this);
 
+        TextView textView=(TextView)findViewById(R.id.tv_toolbar_title);
+        textView.setText("YOUTUBE");
+
 
 
         HorizontalInfiniteCycleViewPager pager = (HorizontalInfiniteCycleViewPager) findViewById(R.id.VerticalCycleViewPager);
-        pager.setAdapter(new PlayerCycleAdapter(initData(),getApplicationContext()));
+        playerItems=(ArrayList<Music>) getIntent().getSerializableExtra("list");
+        pager.setAdapter(new PlayerCycleAdapter(playerItems,getApplicationContext()));
 
     }
 
-    private ArrayList<PlayerItem> initData(){
+
+   /* private ArrayList<PlayerItem> initData(){
         playerItems=new ArrayList<PlayerItem>();
         playerItems.add(new PlayerItem(R.drawable.album_image1,"벚꽃엔딩","버스커버스커"));
         playerItems.add(new PlayerItem(R.drawable.album_image2,"좋은날","아이유"));
         playerItems.add(new PlayerItem(R.drawable.album_image3,"가나다라마바사","세종대왕"));
 
         return playerItems;
-    }
+    }*/
 
     //플레이어가 초기화되지 못할 때 호출
     @Override

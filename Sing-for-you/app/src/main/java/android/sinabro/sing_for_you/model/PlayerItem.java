@@ -1,10 +1,12 @@
 package android.sinabro.sing_for_you.model;
 
+import java.io.Serializable;
+
 /**
  * Created by parktaeim on 2017. 8. 25..
  */
 
-public class PlayerItem {
+public class PlayerItem implements Serializable {
     int Image;
     String title;
     String singer;
