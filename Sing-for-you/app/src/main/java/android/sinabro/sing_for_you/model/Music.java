@@ -1,10 +1,12 @@
 package android.sinabro.sing_for_you.model;
 
+import java.io.Serializable;
+
 /**
  * Created by dsm2016 on 2017-08-12.
  */
 
-public class Music {
+public class Music implements Serializable {
 
     private String title;
 

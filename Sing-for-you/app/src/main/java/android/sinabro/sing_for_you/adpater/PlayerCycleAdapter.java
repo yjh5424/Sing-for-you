@@ -52,9 +52,9 @@ public class PlayerCycleAdapter extends PagerAdapter{
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = mLayoutInflater.inflate(R.layout.player_item,container,false);
+        View view = mLayoutInflater.inflate(R.layout.player_item, container, false);
         CardView cardView = (CardView) view.findViewById(R.id.cardView);
-        ImageView imageView=(ImageView)view.findViewById(R.id.imageView);
+        ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
         TextView titleTextView = (TextView) view.findViewById(R.id.titleTextView);
         TextView singerTextView = (TextView) view.findViewById(R.id.titleTextView);
 

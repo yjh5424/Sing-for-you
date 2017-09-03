@@ -82,7 +82,6 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
     }
 
 
-
     private ArrayList<Music> initData(JsonArray jsonElements){
         playerItems=new ArrayList<Music>();
 
@@ -120,6 +119,7 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         if(!b){
             youTubePlayer.cueVideo(VIDEO_ID);
+            youTubePlayer.
         }
     }
 
