@@ -2,6 +2,7 @@ package android.sinabro.sing_for_you.adpater;
 
 import android.content.Context;
 import android.sinabro.sing_for_you.R;
+import android.sinabro.sing_for_you.model.Music;
 import android.sinabro.sing_for_you.model.PlayerItem;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
 
@@ -23,9 +26,9 @@ import java.util.List;
 public class PlayerCycleAdapter extends PagerAdapter{
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    private ArrayList<PlayerItem> playerItems;
+    private ArrayList<Music> playerItems;
 
-    public PlayerCycleAdapter(ArrayList<PlayerItem> players, Context mContext) {
+    public PlayerCycleAdapter(ArrayList<Music> players, Context mContext) {
         this.playerItems=players;
         this.mContext = mContext;
         mLayoutInflater = LayoutInflater.from(mContext);
@@ -54,7 +57,9 @@ public class PlayerCycleAdapter extends PagerAdapter{
         ImageView imageView=(ImageView)view.findViewById(R.id.imageView);
         TextView titleTextView = (TextView) view.findViewById(R.id.titleTextView);
         TextView singerTextView = (TextView) view.findViewById(R.id.titleTextView);
-        imageView.setImageResource(playerItems.get(position).getImage());
+
+        String uri=playerItems.get(position).getImgURL();
+        Glide.with(mContext).load(uri).into(imageView);
         titleTextView.setText(playerItems.get(position).getTitle());
         singerTextView.setText(playerItems.get(position).getSinger());
         container.addView(view);

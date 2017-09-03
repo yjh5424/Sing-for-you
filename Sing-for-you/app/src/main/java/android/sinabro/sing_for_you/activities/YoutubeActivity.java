@@ -1,11 +1,19 @@
 package android.sinabro.sing_for_you.activities;
 
 import android.content.Intent;
+import android.graphics.BlurMaskFilter;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.sinabro.sing_for_you.R;
 import android.sinabro.sing_for_you.adpater.PlayerCycleAdapter;
+import android.sinabro.sing_for_you.adpater.RecyclerviewAdapter;
+import android.sinabro.sing_for_you.model.Music;
 import android.sinabro.sing_for_you.model.PlayerItem;
+import android.sinabro.sing_for_you.network.HTTPConnection;
+import android.sinabro.sing_for_you.network.Service;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
@@ -15,9 +23,17 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
@@ -28,7 +44,10 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
 
     YouTubePlayerFragment youTubePlayerFragment;
 
-    ArrayList<PlayerItem> playerItems;
+    ArrayList<Music> playerItems;
+    private HorizontalInfiniteCycleViewPager infiniteCycleViewPager;
+    PlayerCycleAdapter playerCycleAdapter;
+    ArrayList<Music> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +57,48 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         youTubePlayerFragment = (YouTubePlayerFragment)getFragmentManager().findFragmentById(R.id.youtubeplayerfragment);
         youTubePlayerFragment.initialize(DEVELOPER_KEY,this);
 
+        Service service = HTTPConnection.getInstance().create(Service.class);
 
+        service.getMusicList(2).enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                JsonArray jsonObject = response.body().getAsJsonArray("music");
+                JsonArray jsonElements = jsonObject.getAsJsonArray();
+                arrayList = initData(jsonElements);
+                infiniteCycleViewPager = (HorizontalInfiniteCycleViewPager) findViewById(R.id.VerticalCycleViewPager);
+                playerCycleAdapter = new PlayerCycleAdapter(arrayList,getApplicationContext());
+                infiniteCycleViewPager.setAdapter(playerCycleAdapter);
+            }
 
-        HorizontalInfiniteCycleViewPager pager = (HorizontalInfiniteCycleViewPager) findViewById(R.id.VerticalCycleViewPager);
-        pager.setAdapter(new PlayerCycleAdapter(initData(),getApplicationContext()));
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+
+//        HorizontalInfiniteCycleViewPager pager = (HorizontalInfiniteCycleViewPager) findViewById(R.id.VerticalCycleViewPager);
+//        pager.setAdapter(new PlayerCycleAdapter(initData(),getApplicationContext()));
 
     }
 
-    private ArrayList<PlayerItem> initData(){
-        playerItems=new ArrayList<PlayerItem>();
-        playerItems.add(new PlayerItem(R.drawable.album_image1,"벚꽃엔딩","버스커버스커"));
-        playerItems.add(new PlayerItem(R.drawable.album_image2,"좋은날","아이유"));
-        playerItems.add(new PlayerItem(R.drawable.album_image3,"가나다라마바사","세종대왕"));
+
+
+    private ArrayList<Music> initData(JsonArray jsonElements){
+        playerItems=new ArrayList<Music>();
+
+        for(int i=0 ;i<jsonElements.size();i++) {
+            JsonObject jsonObject = (JsonObject) jsonElements.get(i);
+            String title = jsonObject.getAsJsonPrimitive("title").getAsString();
+            String singer = jsonObject.getAsJsonPrimitive("singer").getAsString();
+            String url = jsonObject.getAsJsonPrimitive("musicURL").getAsString();
+            String imaurl = jsonObject.getAsJsonPrimitive("imgURL").getAsString();
+
+            playerItems.add(new Music(title, singer, url, imaurl));
+        }
+
+//        playerItems.add(new PlayerItem());
+//        playerItems.add(new PlayerItem("","좋은날","아이유",""));
+//        playerItems.add(new PlayerItem("","가나다라마바사","세종대왕",""));
 
         return playerItems;
     }

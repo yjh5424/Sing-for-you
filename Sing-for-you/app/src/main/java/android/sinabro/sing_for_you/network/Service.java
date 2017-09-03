@@ -47,4 +47,6 @@ public interface Service {
     @GET("playlist")
     Call<JsonObject> getMusicList(@Query("tag") int tag);
 
+
+
 }

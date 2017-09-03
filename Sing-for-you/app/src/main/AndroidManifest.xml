@@ -28,7 +28,9 @@
         </activity>
         <activity android:name=".activities.SignUp"></activity>
         <activity android:name=".activities.MusicPage"></activity>
-        <activity android:name=".activities.YoutubeActivity"></activity>
+        <activity android:name=".activities.YoutubeActivity">
+
+        </activity>
 
     </application>
 
